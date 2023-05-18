@@ -46,7 +46,45 @@
         }
       }
 
-      /*console.log(playRound()); used to */ 
+      let gameWin = 0;
+
+      let gameLose = 0;
+
+      let gameTie = 0;
+
+      function totalRoundResults(roundResult) {
+        if (roundResult === "You win!") {
+          gameWin++;
+        } else if (roundResult === "You lose") {
+          gameLose++;
+        } else if (roundResult === "It's a tie") {
+          gameTie++;
+        }
+      }
+
+      function game() {
+        for (let i = 0; i < 5; i++) {
+          let roundResult = console.log(playRound());
+          totalRoundResults();
+        }
+      }
+
+      function gameResult(gameWin, gameLose, gameTie) {
+        if (gameWin >= 3 || (gameWin + gameTie) > gameLose) {
+          return "Game result: you won the game!";
+        } else if (gameLose >= 3 || (gameLose + gameTie) > gameWin) {
+          return "Game result: you lost the game";
+        } else {
+          return "Game result: it's a tie game!";
+        }
+      }
+
+      /* function here to state result of overall game */
+
+      console.log(game());
+      console.log(gameResult());
+
+      /*console.log(playRound()); used to run a single round of the game and show result in the console on page load*/ 
 
     </script>
   </body>
