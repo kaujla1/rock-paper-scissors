@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors</title>
+  </head>
+
+  <body> <!-- Use onload="FUNCTIONNAMEGOESHERE!!!!()" in the body tag to load the prompt on page load-->
+    <script>
+      
+      function getComputerChoice(computerOptions) {
+        computerOptions = ["Rock", "Paper", "Scissors"];
+        let computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
+        return computerChoice; /* not sure if this should be a console.log() or return call? */ 
+      }
+
+      function playerSelectionPrompt(playerPrompt) {
+        playerPrompt = prompt("Please choose Rock, Paper, or Scissors")
+        selectionFirstLetter = playerPrompt.slice(0, 1);
+        selectionRest = playerPrompt.slice(1);
+        return selectionFirstLetter.toUpperCase() + selectionRest.toLowerCase();
+      }
+
+      function playRound(playerSelection, computerSelection) {
+        playerSelection = playerSelectionPrompt();
+        computerSelection = getComputerChoice();
+        if (playerSelection === "Rock" && computerSelection === "Scissors") {
+          return "You win!";
+        } else if (playerSelection === "Rock" && computerSelection === "Paper") {
+          return "You lose";
+        } else if (playerSelection === "Rock" && computerSelection === "Rock") {
+          return "It's a tie!";
+        } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
+          return "You win!";
+        } else if (playerSelection === "Paper" && computerSelection === "Rock") {
+          return "You lose";
+        } else if (playerSelection === "Paper" && computerSelection === "Paper") {
+          return "It's a tie!";
+        } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
+          return "You win!";
+        } else if (playerSelection === "Scissors" && computerSelection === "Rock") {
+          return "You lose";
+        } else if (playerSelection === "Scissors" && computerSelection === "Scissors") {
+          return "It's a tie";
+        }
+      }
+
+      /*console.log(playRound()); used to */ 
+
+    </script>
+  </body>
+</html>
