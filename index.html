@@ -8,7 +8,8 @@
 
   <body> 
     <script>
-      
+     
+      /*function to generate a random choice for the computer*/
       function getComputerChoice(computerOptions) {
         computerOptions = ["Rock", "Paper", "Scissors"];
         let computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
@@ -16,6 +17,7 @@
         return computerChoice;
       }
 
+      /*function to prompt the player to make a choice*/
       function playerSelectionPrompt(playerPrompt) {
         playerPrompt = prompt("Please choose Rock, Paper, or Scissors")
         selectionFirstLetter = playerPrompt.slice(0, 1);
@@ -23,6 +25,7 @@
         return selectionFirstLetter.toUpperCase() + selectionRest.toLowerCase();
       }
 
+      /*function to play a single round of rock paper scissors*/
       function playRound(playerSelection, computerSelection) {
         playerSelection = playerSelectionPrompt();
         computerSelection = getComputerChoice();
@@ -32,9 +35,9 @@
           return "You lose";
         } else if (playerSelection === "Rock" && computerSelection === "Rock") {
           return "It's a tie!";
-        } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
-          return "You win!";
         } else if (playerSelection === "Paper" && computerSelection === "Rock") {
+          return "You win!";
+        } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
           return "You lose";
         } else if (playerSelection === "Paper" && computerSelection === "Paper") {
           return "It's a tie!";
@@ -47,46 +50,40 @@
         }
       }
 
-      let gameWin = 0;
-
-      let gameLose = 0;
-
-      let gameTie = 0;
-
-      function totalRoundResults(roundResult) {
-        if (roundResult == "You win!") {
-          gameWin = gameWin + 1;
-        } else if (roundResult === "You lose") {
-          gameLose = gameLose + 1;
-        } else if (roundResult === "It's a tie") {
-          gameTie = gameTie + 1;
-        }
-        console.log(gameWin, gameLose, gameTie);
-      }
-
       function game() {
         for (let i = 0; i < 5; i++) {
           let roundResult = console.log(playRound());
-          totalRoundResults();
+          totalRoundResults(roundResult);
         }
+      }
+  
+      let playerScore = 0;
+      let computerScore = 0;
+
+      function totalRoundResults(roundResult) {
+        if (roundResult == "You win!") {
+          playerScore = playerScore + 1;
+        } else if (roundResult === "You lose") {
+          computerScore = computerScore + 1;
+        } else if (roundResult === "It's a tie") {
+          playerScore = playerScore + 1;
+          computerScore = computerScore + 1;
+        }
+        console.log(playerScore, computerScore);
       }
 
       function gameResult(gameWin, gameLose, gameTie) {
-        if (gameWin >= 3 || ((gameWin === 2) + gameTie) > gameLose) {
+        if (playerScore > computerScore) {
           return "Game result: you won the game!";
-        } else if (gameLose >= 3 || ((gameLose === 2) + gameTie) > gameWin) {
+        } else if (computerScore > playerScore) {
           return "Game result: you lost the game";
-        } else {
+        } else if (playerScore == computerScore) {
           return "Game result: it's a tie game!";
         }
       }
 
-      /* function here to state result of overall game */
-
       console.log(game());
       console.log(gameResult());
-
-      /*console.log(playRound()); used to run a single round of the game and show result in the console on page load*/ 
 
     </script>
   </body>
