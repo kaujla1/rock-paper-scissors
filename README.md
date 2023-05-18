@@ -81,4 +81,3 @@ Take the algorithm from Q4 above, and break it down into smaller sub-steps to so
   Optional: the user is prompted on whether they want to play again
     If the user chose yes, then the game resets
     If the user chose no, the game stops there and nothing happens
-
