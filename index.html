@@ -9,26 +9,33 @@
   <body> 
     <script>
      
-      /*function to generate a random choice for the computer*/
+      /*generate a random choice for the computer*/
+      let computerOptions = ["Rock", "Paper", "Scissors"];
+      
       function getComputerChoice(computerOptions) {
-        computerOptions = ["Rock", "Paper", "Scissors"];
         let computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
         console.log("The computer chose: " + computerChoice);
         return computerChoice;
       }
 
-      /*function to prompt the player to make a choice*/
+      /*prompt the player to make a choice*/
+     /* playerPrompt = prompt("Please choose Rock, Paper, or Scissors")
+      
       function playerSelectionPrompt(playerPrompt) {
-        playerPrompt = prompt("Please choose Rock, Paper, or Scissors")
+        selectionFirstLetter = playerPrompt.slice(0, 1);
+        selectionRest = playerPrompt.slice(1);
+        return selectionFirstLetter.toUpperCase() + selectionRest.toLowerCase();
+      }*/
+      
+      function playerSelectionPrompt() {
+        let playerPrompt = prompt("Please choose Rock, Paper, or Scissors")
         selectionFirstLetter = playerPrompt.slice(0, 1);
         selectionRest = playerPrompt.slice(1);
         return selectionFirstLetter.toUpperCase() + selectionRest.toLowerCase();
       }
 
-      /*function to play a single round of rock paper scissors*/
+      /*play a single round of rock paper scissors*/
       function playRound(playerSelection, computerSelection) {
-        playerSelection = playerSelectionPrompt();
-        computerSelection = getComputerChoice();
         if (playerSelection === "Rock" && computerSelection === "Scissors") {
           return "You win!";
         } else if (playerSelection === "Rock" && computerSelection === "Paper") {
@@ -50,18 +57,40 @@
         }
       }
 
-      function game() {
+      /*function game() {
         for (let i = 0; i < 5; i++) {
           let roundResult = console.log(playRound());
-          totalRoundResults(roundResult);
+          scoreKeeper(roundResult);
         }
+      }*/
+
+      
+      let roundResult = playRound(playerSelectionPrompt(), getComputerChoice(computerOptions));
+      /*
+      function game() {
+        for (let i = 0; i < 5; i++) {
+          roundResult = playRound(playerSelection, computerSelection);
+          console.log(roundResult);
+          scoreKeeper();
+        }
+        return console.log(gameResult());
+      }*/
+
+      function game() {
+        for (let i = 0; i < 5; i++) {
+          playRound(playerSelectionPrompt(), getComputerChoice(computerOptions));
+          console.log(roundResult);
+          scoreKeeper();
+        }
+        return console.log(gameResult());
       }
   
+      /*keep track of and adjust the players' scores after each round*/
       let playerScore = 0;
       let computerScore = 0;
 
-      function totalRoundResults(roundResult) {
-        if (roundResult == "You win!") {
+      function scoreKeeper() {
+        if (roundResult === "You win!") {
           playerScore = playerScore + 1;
         } else if (roundResult === "You lose") {
           computerScore = computerScore + 1;
@@ -72,7 +101,8 @@
         console.log(playerScore, computerScore);
       }
 
-      function gameResult(gameWin, gameLose, gameTie) {
+      /*determines who won the overall game*/
+      function gameResult() {
         if (playerScore > computerScore) {
           return "Game result: you won the game!";
         } else if (computerScore > playerScore) {
@@ -82,8 +112,8 @@
         }
       }
 
-      console.log(game());
-      console.log(gameResult());
+      /*run game*/
+      game();
 
     </script>
   </body>
