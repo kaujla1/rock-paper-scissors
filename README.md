@@ -81,3 +81,47 @@ Take the algorithm from Q4 above, and break it down into smaller sub-steps to so
   Optional: the user is prompted on whether they want to play again
     If the user chose yes, then the game resets
     If the user chose no, the game stops there and nothing happens
+
+## Extra code
+
+/*play entire 5 round game*/
+      let roundResult = playRound(playerSelectionPrompt(), getComputerChoice(computerOptions));
+
+      function game() {
+        for (let i = 0; i < 5; i++) {
+          playRound(playerSelectionPrompt(), getComputerChoice(computerOptions));
+          console.log(roundResult);
+          /*scoreKeeper();*/
+        }
+        /*return console.log(gameResult());*/
+      }
+  
+      /*keep track of and adjust the players' scores after each round*/
+      let playerScore = 0;
+      let computerScore = 0;
+
+      function scoreKeeper() {
+        if (roundResult === "You win!") {
+          playerScore = playerScore + 1;
+        } else if (roundResult === "You lose") {
+          computerScore = computerScore + 1;
+        } else if (roundResult === "It's a tie") {
+          playerScore = playerScore + 1;
+          computerScore = computerScore + 1;
+        }
+        console.log(playerScore, computerScore);
+      }
+
+      /*determines who won the overall game*/
+      function gameResult() {
+        if (playerScore > computerScore) {
+          return "Game result: you won the game!";
+        } else if (computerScore > playerScore) {
+          return "Game result: you lost the game";
+        } else if (playerScore == computerScore) {
+          return "Game result: it's a tie game!";
+        }
+      }
+
+      /*run game*/
+      game();
