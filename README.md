@@ -82,46 +82,98 @@ Take the algorithm from Q4 above, and break it down into smaller sub-steps to so
     If the user chose yes, then the game resets
     If the user chose no, the game stops there and nothing happens
 
-## Extra code
+## Game V1 (no loop)
 
-/*play entire 5 round game*/
-      let roundResult = playRound(playerSelectionPrompt(), getComputerChoice(computerOptions));
-
-      function game() {
-        for (let i = 0; i < 5; i++) {
-          playRound(playerSelectionPrompt(), getComputerChoice(computerOptions));
-          console.log(roundResult);
-          /*scoreKeeper();*/
-        }
-        /*return console.log(gameResult());*/
+/*generate a random choice for the computer*/      
+      function getComputerChoice() {
+        let computerOptions = ["Rock", "Paper", "Scissors"];
+        let computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
+        console.log("The computer chose: " + computerChoice);
+        return computerChoice;
       }
-  
-      /*keep track of and adjust the players' scores after each round*/
+
+      /*prompt the player to make a choice*/
+      function playerSelectionPrompt() {
+        let playerPrompt = prompt("Please choose Rock, Paper, or Scissors")
+        selectionFirstLetter = playerPrompt.slice(0, 1);
+        selectionRest = playerPrompt.slice(1);
+        console.log("You chose: " + selectionFirstLetter.toUpperCase() + selectionRest.toLowerCase())
+        return selectionFirstLetter.toUpperCase() + selectionRest.toLowerCase();
+      }
+
+      /*play a single round of rock paper scissors and return the result of the round*/
+      function playRound(playerSelection, computerSelection) {
+        if (playerSelection === "Rock" && computerSelection === "Scissors") {
+          return "You win!";
+        } else if (playerSelection === "Rock" && computerSelection === "Paper") {
+          return "You lose";
+        } else if (playerSelection === "Rock" && computerSelection === "Rock") {
+          return "It's a tie!";
+        } else if (playerSelection === "Paper" && computerSelection === "Rock") {
+          return "You win!";
+        } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
+          return "You lose";
+        } else if (playerSelection === "Paper" && computerSelection === "Paper") {
+          return "It's a tie!";
+        } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
+          return "You win!";
+        } else if (playerSelection === "Scissors" && computerSelection === "Rock") {
+          return "You lose";
+        } else if (playerSelection === "Scissors" && computerSelection === "Scissors") {
+          return "It's a tie!";
+        }
+      }
+
+     /*note, the test from step 5 doesn't work but console.log(playRound(playerSelectionPrompt(), getComputerChoice())); does work?*/
+
+      /*playRound(playerSelectionPrompt(), getComputerChoice()); this will run the game, but not display the win/lose/tie result unless you wrap it in a console.log. However, if I run that without the console.log in the actual browser console, then it will show the win/lose/tie result. Not sure why there's a difference?*/
+
+      /*play an entire 5 round game, then return the overall win/lose/tie result*/
+      let result;
+      
+      function game() {
+        result = playRound(playerSelectionPrompt(), getComputerChoice());
+        console.log(result);
+        keepScore();
+        result = playRound(playerSelectionPrompt(), getComputerChoice());
+        console.log(result);
+        keepScore();
+        result = playRound(playerSelectionPrompt(), getComputerChoice());
+        console.log(result);
+        keepScore();
+        result = playRound(playerSelectionPrompt(), getComputerChoice());
+        console.log(result);
+        keepScore();
+        result = playRound(playerSelectionPrompt(), getComputerChoice());
+        console.log(result);
+        keepScore();
+        console.log(gameResult());
+      }
+      
+      /*keep track of players' scores after each round*/
       let playerScore = 0;
       let computerScore = 0;
-
-      function scoreKeeper() {
-        if (roundResult === "You win!") {
-          playerScore = playerScore + 1;
-        } else if (roundResult === "You lose") {
-          computerScore = computerScore + 1;
-        } else if (roundResult === "It's a tie") {
-          playerScore = playerScore + 1;
-          computerScore = computerScore + 1;
+      
+      function keepScore() {
+        if (result === "You win!") {
+          playerScore = playerScore +1;
+        } else if (result === "You lose") {
+          computerScore = computerScore +1;
+        } else if (result === "It's a tie!") {
+          playerScore = playerScore +1;
+          computerScore = computerScore +1;
         }
-        console.log(playerScore, computerScore);
       }
 
-      /*determines who won the overall game*/
+      /*calculate the results after all 5 rounds are finished*/
       function gameResult() {
         if (playerScore > computerScore) {
-          return "Game result: you won the game!";
+          return "Game result: you win!";
         } else if (computerScore > playerScore) {
-          return "Game result: you lost the game";
-        } else if (playerScore == computerScore) {
-          return "Game result: it's a tie game!";
+          return "Game result: you lose.";
+        } else if (playerScore === computerScore) {
+          return "Game result: it's a tie!";
         }
       }
 
-      /*run game*/
       game();
