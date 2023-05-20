@@ -22,6 +22,7 @@
         let playerPrompt = prompt("Please choose Rock, Paper, or Scissors")
         selectionFirstLetter = playerPrompt.slice(0, 1);
         selectionRest = playerPrompt.slice(1);
+        console.log("You chose: " + selectionFirstLetter.toUpperCase() + selectionRest.toLowerCase())
         return selectionFirstLetter.toUpperCase() + selectionRest.toLowerCase();
       }
 
@@ -48,9 +49,9 @@
         }
       }
 
-      /*playRound(playerSelectionPrompt(), getComputerChoice()); this will run the game, but not display the win/lose/tie result unless you wrap it in a console.log. However, if I run that without the console.log in the actual browser console, then it will show the win/lose/tie result. Not sure why there's a difference?*/
+     /*note, the test from step 5 doesn't work but console.log(playRound(playerSelectionPrompt(), getComputerChoice())); does work?*/
 
-      /*note, the test from step 5 doesn't work but console.log(playRound(playerSelectionPrompt(), getComputerChoice())); does work?*/
+      /*playRound(playerSelectionPrompt(), getComputerChoice()); this will run the game, but not display the win/lose/tie result unless you wrap it in a console.log. However, if I run that without the console.log in the actual browser console, then it will show the win/lose/tie result. Not sure why there's a difference?*/
 
       /*play an entire 5 round game, then return the overall win/lose/tie result*/
       let result;
@@ -73,7 +74,7 @@
         keepScore();
         console.log(gameResult());
       }
-
+      
       /*keep track of players' scores after each round*/
       let playerScore = 0;
       let computerScore = 0;
