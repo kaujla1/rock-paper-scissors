@@ -51,7 +51,7 @@ Rock beats scissors, scissors beats paper, and paper beats rock. Any options vs 
 
 ## Game V1 (no loop)
 
-/*generate a random choice for the computer*/      
+      /*generate a random choice for the computer*/      
       function getComputerChoice() {
         let computerOptions = ["Rock", "Paper", "Scissors"];
         let computerChoice = computerOptions[Math.floor(Math.random() * computerOptions.length)];
@@ -91,7 +91,7 @@ Rock beats scissors, scissors beats paper, and paper beats rock. Any options vs 
         }
       }
 
-     /*note, the test from step 5 doesn't work but console.log(playRound(playerSelectionPrompt(), getComputerChoice())); does work?*/
+      /*note, the test from step 5 doesn't work but console.log(playRound(playerSelectionPrompt(), getComputerChoice())); does work?*/
 
       /*playRound(playerSelectionPrompt(), getComputerChoice()); this will run the game, but not display the win/lose/tie result unless you wrap it in a console.log. However, if I run that without the console.log in the actual browser console, then it will show the win/lose/tie result. Not sure why there's a difference?*/
 
